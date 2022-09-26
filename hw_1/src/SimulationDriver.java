@@ -54,6 +54,7 @@ public class SimulationDriver {
 						}
 					}
 
+					System.out.println(question.toString());
 					System.out.println(service.getAnswerStatistics());
 					timer.cancel();
 				}

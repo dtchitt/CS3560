@@ -47,7 +47,7 @@ public class VotingService {
 		}
 
 		String results = "Correct Answers: " + correctAnswers + "\nIncorrect Answers: " + inCorrectAnswers + "\n";
-		results += "Number of submissions per choice " + answersData.toString();
+		results += "Number of submissions per choice: " + answersData.toString();
 		return results;
 	}
 }
