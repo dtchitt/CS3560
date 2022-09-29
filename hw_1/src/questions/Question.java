@@ -81,6 +81,14 @@ public abstract class Question {
 	 */
 	public abstract void setAnswer(List<String> data) throws Exception;
 
+	/**
+	 * Althought this kind of violates the SRP, it does allow me to not violate the OCP.
+	 * Originally I had this done in the SimDriver, but I needed to check the Question type
+	 * In class 9/29 we learned OCP, so I decided to change it.
+	 * I left my commented out code in SimDriver so you can see what I mean
+	 */
+	public abstract List<String> generateAnswer();
+
 	public List<String> getAnswer() {
 		return this.answers;
 	}

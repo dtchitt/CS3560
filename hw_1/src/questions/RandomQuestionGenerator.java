@@ -56,6 +56,8 @@ public class RandomQuestionGenerator {
 	public Question randomChoice() throws Exception {
 		// Okay, Maybe this isnt the best way to do this but basically this will make it
 		// so each type has ~50% chance to be selected each time this function is run
+		// If you read this please give me a suggestion on how I can acheive this without
+		// violating the OCP
 		if (Math.random() > 0.5) {
 			return multiChoice();
 		} else {

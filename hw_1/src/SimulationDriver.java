@@ -1,13 +1,8 @@
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import questions.MultiAnswerQuestion;
 import questions.Question;
 import questions.RandomQuestionGenerator;
-import questions.SingleAnswerQuestion;
 import services.VotingService;
 import users.Student;
 
@@ -15,7 +10,7 @@ public class SimulationDriver {
 	public static void main(String[] args) throws Exception {
 		//Create a random multi or single choice question
 		RandomQuestionGenerator qGen = new RandomQuestionGenerator();
-		Question question = qGen.randomChoice();
+		Question question = qGen.singleChoice();
 
 		//Create vote service
 		VotingService service = new VotingService(question);
@@ -41,7 +36,7 @@ public class SimulationDriver {
 				if (duration > 0) {
 					for (Student student : students) {
 						if (Math.random() > 0.5) {
-							student.submitAnswer(service, generateAnswer(question, student));
+							student.submitAnswer(service, question.generateAnswer());
 						}
 					}
 
@@ -50,11 +45,11 @@ public class SimulationDriver {
 					//If a student has not answered yet, force them to answer
 					for (Student student : students) {
 						if (!service.studentAnswered(student)) {
-							student.submitAnswer(service, generateAnswer(question, student));
+							student.submitAnswer(service, question.generateAnswer());
 						}
 					}
 
-					System.out.println(question.toString());
+					service.printQuestion();
 					System.out.println(service.getAnswerStatistics());
 					timer.cancel();
 				}
@@ -64,20 +59,20 @@ public class SimulationDriver {
 		timer.schedule(onTick, 0, tickRate);
 	}
 
-	private static List<String> generateAnswer(Question question, Student student) {
-		List<String> answers = new LinkedList<String>();
-		List<String> choices = question.getChoices();
+	// private static List<String> generateAnswer(Question question) {
+	// 	List<String> answers = new LinkedList<String>();
+	// 	List<String> choices = question.getChoices();
 
-		if (question.getClass() == MultiAnswerQuestion.class) {
-			//This does make it possible to submit a blank answer, which will be counted as wrong.
-			for (String string : choices) {
-				if (Math.random() > 0.1) {
-					answers.add(string);
-				}
-			}
-		} else if (question.getClass() == SingleAnswerQuestion.class) {
-			answers.add(choices.get(new Random().nextInt(choices.size())));
-		}
-		return answers;
-	}
+	// 	if (question.getClass() == MultiAnswerQuestion.class) {
+	// 		//This does make it possible to submit a blank answer, which will be counted as wrong.
+	// 		for (String string : choices) {
+	// 			if (Math.random() > 0.1) {
+	// 				answers.add(string);
+	// 			}
+	// 		}
+	// 	} else if (question.getClass() == SingleAnswerQuestion.class) {
+	// 		answers.add(choices.get(new Random().nextInt(choices.size())));
+	// 	}
+	// 	return answers;
+	// }
 }

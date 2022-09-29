@@ -1,4 +1,5 @@
 package questions;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MultiAnswerQuestion extends Question {
@@ -23,5 +24,18 @@ public class MultiAnswerQuestion extends Question {
 		}
 
 		this.answers = data;
+	}
+
+	@Override
+	public List<String> generateAnswer() {
+		List<String> generatedAnswer = new ArrayList<String>();
+
+		for (String string : this.getChoices()) {
+			if (Math.random() > 0.1) {
+				generatedAnswer.add(string);
+			}
+		}
+
+		return generatedAnswer;
 	}
 }

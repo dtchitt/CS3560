@@ -1,5 +1,7 @@
 package questions;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SingleAnswerQuestion extends Question {
 	public SingleAnswerQuestion(String query) {
@@ -23,5 +25,14 @@ public class SingleAnswerQuestion extends Question {
 		}
 
 		this.answers = data;
+	}
+
+	@Override
+	public List<String> generateAnswer() {
+		List<String> generatedAnswer = new ArrayList<String>();
+
+		generatedAnswer.add(this.getChoices().get(new Random().nextInt(this.getChoices().size())));
+
+		return generatedAnswer;
 	}
 }
