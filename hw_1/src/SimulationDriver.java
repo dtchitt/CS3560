@@ -10,7 +10,7 @@ public class SimulationDriver {
 	public static void main(String[] args) throws Exception {
 		//Create a random multi or single choice question
 		RandomQuestionGenerator qGen = new RandomQuestionGenerator();
-		Question question = qGen.singleChoice();
+		Question question = qGen.randomChoice();
 
 		//Create vote service
 		VotingService service = new VotingService(question);
